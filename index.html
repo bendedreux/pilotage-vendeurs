@@ -22,11 +22,11 @@ main{max-width:1100px;margin:auto;padding:18px 14px 50px}input[type=file]{displa
 <body>
 <header><div class="head">
 <div><h1>📊 Pilotage vendeurs</h1><div class="sub">Suivi quotidien de l'activité commerciale</div></div>
-<label><input id="file" type="file" accept=".xlsx,.xls,.csv,.txt"><button class="primary" onclick="document.getElementById('file').click()">＋ Importer</button></label>
+<label><input id="file" type="file"><button class="primary" onclick="document.getElementById('file').click()">＋ Importer</button></label>
 </div></header>
 <main>
 <div class="toolbar"><button class="secondary" onclick="loadDemo()">Charger un exemple</button><button class="secondary" onclick="resetData()">Réinitialiser</button></div>
-<div id="status" class="status">Aucune donnée importée. Tu peux maintenant importer directement ton fichier Excel .xlsx.</div>
+<div id="status" class="status">Aucune donnée importée. Sélectionne ton fichier Excel dans Fichiers : .xlsx ou .xls.</div>
 <div class="grid">
 <div class="card"><div class="label">Affaires clients</div><div id="kAff" class="kpi">0</div></div>
 <div class="card"><div class="label">Offres importées</div><div id="kOff" class="kpi">0</div></div>
