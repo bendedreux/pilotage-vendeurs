@@ -4,74 +4,147 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Pilotage vendeurs</title>
-<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
 <style>
-:root{--navy:#17242d;--blue:#087cf0;--bg:#f1f5f7;--card:#fff;--muted:#68757d;--line:#e3e9ed;--green:#16a34a;--red:#dc2626;--orange:#f59e0b}
-*{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;background:var(--bg);color:#18242d}
-header{background:var(--navy);color:#fff;padding:22px 18px 20px;position:sticky;top:0;z-index:5;box-shadow:0 2px 10px #0002}
-.head{display:flex;align-items:center;justify-content:space-between;gap:12px}.title{font-size:28px;font-weight:800}.sub{font-size:16px;color:#c8d0d5;margin-top:4px}
-button{border:0;border-radius:14px;padding:12px 16px;font-weight:800;font-size:15px;cursor:pointer}.primary{background:#fff;color:var(--navy)}.blue{background:var(--blue);color:#fff}.ghost{background:#edf3f7;color:#1d2b34}
-input[type=file]{display:none}.wrap{max-width:1100px;margin:auto;padding:16px}
-.nav{display:flex;gap:10px;overflow:auto;padding:2px 0 14px}.nav button{white-space:nowrap;background:#fff;color:var(--blue)}.nav button.active{background:var(--navy);color:#fff}
-.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}.tile,.seller,.panel{background:var(--card);border-radius:24px;padding:20px;box-shadow:0 3px 14px #17242d12}.tile h3{margin:0;color:var(--muted);font-size:18px;font-weight:600}.num{font-size:42px;font-weight:800;margin:8px 0}.hint{color:var(--muted)}
-h2{font-size:28px;margin:26px 0 14px}.sellergrid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}.seller h3{margin:0;font-size:21px}.pct{float:right;font-weight:800}.stats{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:14px}.stat{background:#f1f5f7;border-radius:15px;padding:12px;text-align:center}.stat b{display:block;font-size:24px}.stat span{color:var(--muted);font-size:14px}
-.toolbar{display:flex;gap:10px;flex-wrap:wrap;margin:12px 0}.search{flex:1;min-width:220px;border:1px solid var(--line);border-radius:14px;padding:13px 15px;font-size:16px;background:#fff}
-.list{display:flex;flex-direction:column;gap:10px}.aff{background:#fff;border-radius:18px;padding:15px;border:1px solid var(--line);cursor:pointer}.afftop{display:flex;justify-content:space-between;gap:10px}.client{font-size:18px;font-weight:800}.small{color:var(--muted);font-size:14px;margin-top:4px}.tag{display:inline-block;padding:5px 8px;border-radius:9px;background:#eef4f8;font-size:12px;font-weight:700;margin:5px 5px 0 0}.tag.green{background:#e8f7ed;color:#16753a}.tag.red{background:#feecec;color:#a51d1d}.tag.orange{background:#fff4df;color:#9a6500}
-.modal{position:fixed;inset:0;background:#0008;display:none;align-items:flex-end;z-index:20}.modal.open{display:flex}.sheet{background:#fff;width:100%;max-height:88vh;overflow:auto;border-radius:25px 25px 0 0;padding:22px}.sheethead{display:flex;justify-content:space-between;align-items:center}.x{background:#eef2f4;border-radius:50%;width:42px;height:42px;padding:0}.row{padding:11px 0;border-bottom:1px solid var(--line)}.row b{display:block}.empty{text-align:center;padding:35px;color:var(--muted)}
-.importbox{background:#eaf4ff;border:1px dashed #73b7ff;border-radius:18px;padding:15px;margin-bottom:16px}.importbox b{display:block;margin-bottom:5px}.foot{color:var(--muted);font-size:13px;text-align:center;padding:25px 5px}
-@media(min-width:800px){.grid{grid-template-columns:repeat(3,1fr)}.sellergrid{grid-template-columns:repeat(3,1fr)}.modal{align-items:center;padding:30px}.sheet{max-width:720px;border-radius:25px}}
+:root{--navy:#17242d;--blue:#0877ff;--bg:#f4f6f8;--card:#fff;--text:#17202a;--muted:#68737d;--line:#dde2e7;--green:#1f9d55;--orange:#e58a00;--red:#d64545}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;color:var(--text)}
+header{background:var(--navy);color:#fff;padding:18px 16px 20px;position:sticky;top:0;z-index:5}
+.head{max-width:1100px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:12px}
+h1{font-size:23px;margin:0}.sub{font-size:12px;opacity:.75;margin-top:4px}
+button{border:0;border-radius:12px;padding:11px 15px;font-weight:700;font-size:14px;cursor:pointer}
+.primary{background:var(--blue);color:#fff}.secondary{background:#fff;color:var(--navy)}
+main{max-width:1100px;margin:auto;padding:18px 14px 50px}
+.toolbar{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:16px}
+input[type=file]{display:none}
+.status{background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin-bottom:16px;font-size:13px}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;box-shadow:0 1px 3px #0000000a}
+.kpi{font-size:30px;font-weight:800;margin-top:6px}.label{color:var(--muted);font-size:13px}.small{font-size:12px;color:var(--muted)}
+.section{margin-top:22px}.section h2{font-size:19px;margin:0 0 10px}
+.list{display:flex;flex-direction:column;gap:9px}.row{background:#fff;border:1px solid var(--line);border-radius:13px;padding:13px;display:flex;justify-content:space-between;gap:12px;align-items:center}
+.badge{display:inline-block;border-radius:999px;padding:4px 8px;font-size:11px;font-weight:700;background:#edf1f4}
+.green{background:#e8f7ee;color:var(--green)}.orange{background:#fff2dd;color:#a76100}.red{background:#fdeaea;color:#b33131}
+.sellergrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.empty{padding:22px;text-align:center;color:var(--muted);background:#fff;border:1px dashed #cbd2d8;border-radius:14px}
+.modal{position:fixed;inset:0;background:#0008;display:none;align-items:flex-end;justify-content:center;z-index:20}
+.modal.show{display:flex}.sheet{background:#fff;width:min(720px,100%);max-height:85vh;overflow:auto;border-radius:20px 20px 0 0;padding:18px}
+.sheet h2{margin:0 0 12px}.close{float:right;background:#eef1f4}.filehelp{font-size:12px;color:var(--muted);line-height:1.45}
+@media(max-width:800px){.grid{grid-template-columns:repeat(2,1fr)}.sellergrid{grid-template-columns:1fr 1fr}}
+@media(max-width:500px){.grid{grid-template-columns:1fr 1fr;gap:8px}.card{padding:12px}.kpi{font-size:25px}.sellergrid{grid-template-columns:1fr}.head{align-items:flex-start}.primary{padding:10px 12px}}
 </style>
 </head>
 <body>
-<header><div class="head"><div><div class="title">📊 Pilotage vendeurs</div><div class="sub">Chef des ventes</div></div>
-<label class="primary" style="padding:12px 16px;border-radius:14px;font-weight:800;cursor:pointer">＋ Importer<input id="file" type="file" accept=".xlsx,.xls,.csv"></label></div></header>
-<div class="wrap">
-<div class="importbox"><b>📥 Import quotidien</b><span id="importInfo">Importe ton export Excel d'offres. 1 client = 1 affaire, même s'il possède plusieurs offres.</span></div>
-<div class="nav"><button class="active" data-view="dashboard">Tableau de bord</button><button data-view="affaires">Affaires</button><button data-view="offres">Offres</button><button data-view="vendeurs">Vendeurs</button></div>
-<main id="app"></main>
-<div class="foot">Les données importées sont conservées dans ce navigateur. Pour travailler sur un autre téléphone ou PC, réimporte le dernier fichier.</div>
+<header><div class="head">
+<div><h1>📊 Pilotage vendeurs</h1><div class="sub">Suivi quotidien de l'activité commerciale</div></div>
+<label><input id="file" type="file" accept=".csv,.txt"><button class="primary" onclick="document.getElementById('file').click()">＋ Importer</button></label>
+</div></header>
+
+<main>
+<div class="toolbar">
+<button class="secondary" onclick="loadDemo()">Charger un exemple</button>
+<button class="secondary" onclick="resetData()">Réinitialiser</button>
 </div>
-<div class="modal" id="modal"><div class="sheet"><div class="sheethead"><h2 id="modalTitle" style="margin:0"></h2><button class="x" onclick="closeModal()">✕</button></div><div id="modalBody"></div></div></div>
+<div id="status" class="status">Aucune donnée importée. Tu peux importer un fichier CSV depuis ton téléphone ou ton PC.</div>
+
+<div class="grid">
+<div class="card"><div class="label">Affaires clients</div><div id="kAff" class="kpi">0</div></div>
+<div class="card"><div class="label">Offres importées</div><div id="kOff" class="kpi">0</div></div>
+<div class="card"><div class="label">Affaires actives</div><div id="kAct" class="kpi">0</div></div>
+<div class="card"><div class="label">Avec bon de commande</div><div id="kBc" class="kpi">0</div></div>
+</div>
+
+<div class="section"><h2>Vue vendeurs</h2><div id="sellers" class="sellergrid"></div></div>
+<div class="section"><h2>Affaires chaudes</h2><div id="hot" class="list"></div></div>
+<div class="section"><h2>Dernières affaires</h2><div id="latest" class="list"></div></div>
+</main>
+
+<div id="modal" class="modal" onclick="if(event.target===this)closeModal()"><div class="sheet">
+<button class="close" onclick="closeModal()">Fermer</button><h2 id="modalTitle">Affaire</h2><div id="modalBody"></div>
+</div></div>
+
 <script>
-const KEY="pilotageVendeursV2";
-let db=JSON.parse(localStorage.getItem(KEY)||'{"offers":[],"importedAt":null}');
-const app=document.getElementById("app"), file=document.getElementById("file");
-const norm=s=>String(s??"").trim().replace(/\s+/g," ").toUpperCase();
-const money=s=>{let x=String(s??"").replace(/\s/g,"").replace("EUR","").replace(",","."); x=parseFloat(x);return isNaN(x)?"":x.toLocaleString("fr-FR",{style:"currency",currency:"EUR"})};
-const dateFR=s=>{if(!s)return"";let d=s instanceof Date?s:new Date(s);return isNaN(d)?"":d.toLocaleDateString("fr-FR")};
-function save(){localStorage.setItem(KEY,JSON.stringify(db))}
-function validRows(rows){return rows.map(r=>{let out={};Object.keys(r).forEach(k=>out[norm(k)]=r[k]);return out}).filter(r=>r["COMPTE"]&&r["OFFRE ET BON DE COMMANDE"])}
-function parseRows(rows){
- return validRows(rows).map(r=>({offer:String(r["OFFRE ET BON DE COMMANDE"]??""),client:String(r["COMPTE"]??"").trim(),date:r["DATE DE L'OFFRE"]||"",seller:String(r["NOM DU PROPRIETAIRE"]??"").trim(),model:String(r["MODÈLE"]??r["MODELE"]??"").trim(),version:String(r["VERSION"]??"").trim(),color:String(r["COULEUR"]??"").trim(),status:String(r["STATUT"]??"").trim(),amount:String(r["TOTAL NET À PAYER"]??r["TOTAL NET A PAYER"]??"").trim(),brand:String(r["MARQUE"]??"").trim()}));
+let data=[];
+
+function clean(v){return String(v??'').trim()}
+function norm(v){return clean(v).toLowerCase().normalize('NFD').replace(/[\\u0300-\\u036f]/g,'')}
+function parseCSV(text){
+  text=text.replace(/^\\uFEFF/,'');
+  const lines=text.split(/\\r?\\n/).filter(x=>x.trim());
+  if(!lines.length)return [];
+  const sep=(lines[0].split(';').length>=lines[0].split(',').length)?';':',';
+  const rows=lines.map(line=>line.split(sep).map(x=>x.trim().replace(/^"(.*)"$/,'$1')));
+  const headers=rows.shift().map(norm);
+  const find=(names)=>{for(const n of names){const i=headers.findIndex(h=>h.includes(n));if(i>=0)return i}return -1};
+  const ci=find(['client','nom client','raison sociale','nom']);
+  const si=find(['vendeur','commercial','sales','conseiller']);
+  const di=find(['date','creation','offre']);
+  const pi=find(['statut','status','etape','stage']);
+  const mi=find(['montant','prix','total','ca']);
+  const bi=find(['bon de commande','commande','bc']);
+  return rows.map((r,i)=>({
+    id:String(i+1),client:clean(r[ci>=0?ci:0])||'Client sans nom',
+    seller:clean(r[si>=0?si:1])||'Non attribué',
+    date:clean(r[di>=0?di:2]),
+    status:clean(r[pi>=0?pi:3])||'En cours',
+    amount:clean(r[mi>=0?mi:4]),
+    bc:bi>=0? /oui|yes|1|commande|sign/.test(norm(r[bi])) : /commande|bon de commande|livr/i.test(norm(r[pi>=0?pi:3])),
+    raw:r
+  }));
 }
-file.onchange=async e=>{let f=e.target.files[0];if(!f)return;try{let data=await f.arrayBuffer(), wb=XLSX.read(data,{type:"array",cellDates:true});let rows=XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]],{defval:""});let parsed=parseRows(rows);if(!parsed.length)throw new Error("Aucune ligne d'offre exploitable.");db.offers=parsed;db.importedAt=new Date().toISOString();save();document.getElementById("importInfo").textContent=`${parsed.length} offres importées • ${clients().length} affaires clients • import du ${new Date().toLocaleString("fr-FR")}`;render("dashboard");alert(`Import réussi : ${parsed.length} offres et ${clients().length} affaires clients.`)}catch(err){alert("Impossible d'importer ce fichier : "+err.message)}file.value=""};
-function clients(){let m=new Map();db.offers.forEach(o=>{let k=norm(o.client);if(!m.has(k))m.set(k,{client:o.client,seller:o.seller,offers:[],last:o.date});let a=m.get(k);a.offers.push(o);if(new Date(o.date)>new Date(a.last)){a.last=o.date;a.seller=o.seller}});return [...m.values()]}
-function sellers(){let m=new Map();db.offers.forEach(o=>{let s=o.seller||"Sans vendeur";if(!m.has(s))m.set(s,{name:s,offers:0,clients:new Set(),active:0,expired:0,orders:0});let x=m.get(s);x.offers++;x.clients.add(norm(o.client));if(norm(o.status)==="ACTIF")x.active++;if(norm(o.status).includes("EXPIR"))x.expired++;if(norm(o.status).includes("BON DE COMMANDE"))x.orders++});return [...m.values()].map(x=>({...x,clients:x.clients.size}))}
-function tile(label,n,emoji,view){return `<div class="tile" onclick="render('${view}')"><h3>${emoji} ${label}</h3><div class="num">${n}</div><div class="hint">Cliquer pour ouvrir →</div></div>`}
-function dashboard(){let cs=clients(),ss=sellers(),active=db.offers.filter(o=>norm(o.status)==="ACTIF").length,orders=db.offers.filter(o=>norm(o.status).includes("BON DE COMMANDE")).length,exp=db.offers.filter(o=>norm(o.status).includes("EXPIR")).length;app.innerHTML=`<div class="panel" style="margin-bottom:16px"><h2 style="margin:0 0 12px">🌅 Rapport de la veille</h2><div class="grid" id="veille"></div></div><div class="grid">${tile("Affaires",cs.length,"👥","affaires")}${tile("Offres",db.offers.length,"📋","offres")}${tile("Actives",active,"🟢","offres")}${tile("Avec bon de commande",orders,"📝","offres")}${tile("Expirées",exp,"⏰","offres")}${tile("Vendeurs",ss.length,"👤","vendeurs")}</div><h2>👥 Vendeurs</h2><div class="sellergrid">${ss.map(s=>sellerCard(s)).join("")||'<div class="empty">Importe ton fichier d’offres pour commencer.</div>'}</div>`}
-function renderVeille(){
- const box=document.getElementById("veille"); if(!box)return;
- const y=new Date(); y.setDate(y.getDate()-1);
- const key=d=>{let x=new Date(d);return isNaN(x)?"":x.toLocaleDateString("fr-CA")};
- const target=key(y);
- const vo=db.offers.filter(o=>key(o.date)===target);
- const vc=new Set(vo.map(o=>norm(o.client))).size;
- const vs=[...new Set(vo.map(o=>o.seller||"Sans vendeur"))];
- box.innerHTML=`${tile("Offres hier",vo.length,"📋","offres")} ${tile("Affaires nouvelles hier",vc,"👥","affaires")}<div class="tile"><h3>👤 Vendeurs actifs hier</h3><div class="num">${vs.length}</div><div class="hint">${vs.join(", ")||"Aucun"}</div></div>`;
+function render(){
+  const clients=new Map();
+  data.forEach(x=>{const k=norm(x.client)||x.id;if(!clients.has(k))clients.set(k,[]);clients.get(k).push(x)});
+  const affairs=[...clients.values()].map(a=>a[a.length-1]);
+  document.getElementById('kAff').textContent=affairs.length;
+  document.getElementById('kOff').textContent=data.length;
+  document.getElementById('kAct').textContent=affairs.filter(x=>!/(livr|annul|perdu|vendu)/i.test(x.status)).length;
+  document.getElementById('kBc').textContent=affairs.filter(x=>x.bc).length;
+
+  const bySeller={};
+  data.forEach(x=>{bySeller[x.seller]??=[];bySeller[x.seller].push(x)});
+  const sg=document.getElementById('sellers');sg.innerHTML='';
+  Object.entries(bySeller).sort((a,b)=>b[1].length-a[1].length).forEach(([s,arr])=>{
+    const unique=new Set(arr.map(x=>norm(x.client))).size;
+    sg.innerHTML+=`<div class="card"><b>${esc(s)}</b><div class="kpi">${unique}</div><div class="small">affaires · ${arr.length} offres</div></div>`;
+  });
+  if(!sg.innerHTML)sg.innerHTML='<div class="empty">Aucun vendeur à afficher.</div>';
+
+  const hot=affairs.filter(x=>!x.bc && !/(annul|perdu|vendu|livr)/i.test(x.status)).slice(0,20);
+  document.getElementById('hot').innerHTML=hot.length?hot.map(x=>row(x,true)).join(''):'<div class="empty">Aucune affaire chaude.</div>';
+  const latest=[...data].reverse().slice(0,20);
+  document.getElementById('latest').innerHTML=latest.length?latest.map(x=>row(x,false)).join(''):'<div class="empty">Aucune affaire.</div>';
 }
-function sellerCard(s){return `<div class="seller" onclick="render('affaires','${encodeURIComponent(s.name)}')"><h3>${s.name}<span class="pct">${s.clients?Math.round(s.orders/s.clients*100):0}%</span></h3><div class="stats"><div class="stat"><b>${s.clients}</b><span>Affaires</span></div><div class="stat"><b>${s.offers}</b><span>Offres</span></div><div class="stat"><b>${s.active}</b><span>Actives</span></div><div class="stat"><b>${s.orders}</b><span>BDC</span></div></div></div>`}
-function affaires(filter=""){let q=decodeURIComponent(filter||"");app.innerHTML=`<div class="toolbar"><input id="search" class="search" placeholder="🔎 Rechercher un client, vendeur ou modèle…"><button class="ghost" onclick="render('dashboard')">← Tableau</button></div><div id="list" class="list"></div>`;let input=document.getElementById("search");input.value=q;input.oninput=()=>drawAff(input.value);drawAff(q)}
-function drawAff(q=""){let needle=norm(q), list=clients().filter(a=>!needle||norm(a.client).includes(needle)||norm(a.seller).includes(needle)||a.offers.some(o=>norm(o.model).includes(needle)));document.getElementById("list").innerHTML=list.map(a=>`<div class="aff" onclick="openClient('${encodeURIComponent(a.client)}')"><div class="afftop"><div class="client">${a.client}</div><span class="tag">${a.seller}</span></div><div class="small">${a.offers.length} offre${a.offers.length>1?"s":""} • dernière offre ${dateFR(a.last)}</div>${[...new Set(a.offers.map(o=>o.status))].map(s=>`<span class="tag ${norm(s).includes("EXPIR")?"red":norm(s).includes("BON")?"green":""}">${s}</span>`).join("")}</div>`).join("")||'<div class="empty">Aucune affaire trouvée.</div>'}
-function offers(){app.innerHTML=`<div class="toolbar"><input id="search" class="search" placeholder="🔎 Rechercher client, offre, modèle ou vendeur…"><button class="ghost" onclick="render('dashboard')">← Tableau</button></div><div id="list" class="list"></div>`;document.getElementById("search").oninput=e=>drawOffers(e.target.value);drawOffers("")}
-function drawOffers(q){let n=norm(q),list=db.offers.filter(o=>!n||norm(o.client).includes(n)||norm(o.offer).includes(n)||norm(o.model).includes(n)||norm(o.seller).includes(n));document.getElementById("list").innerHTML=list.map(o=>`<div class="aff"><div class="afftop"><div class="client">${o.client}</div><span class="tag">${o.seller}</span></div><div class="small">${o.offer} • ${dateFR(o.date)}</div><span class="tag">${o.model||"Modèle non renseigné"}</span><span class="tag ${norm(o.status).includes("EXPIR")?"red":norm(o.status).includes("BON")?"green":""}">${o.status||"Sans statut"}</span>${o.amount?`<span class="tag">${money(o.amount)}</span>`:""}</div>`).join("")||'<div class="empty">Aucune offre trouvée.</div>'}
-function vendeurs(){app.innerHTML=`<h2>👤 Vendeurs</h2><div class="sellergrid">${sellers().map(s=>sellerCard(s)).join("")||'<div class="empty">Aucune donnée.</div>'}</div>`}
-function openClient(enc){let name=decodeURIComponent(enc),a=clients().find(x=>norm(x.client)===norm(name));if(!a)return;document.getElementById("modalTitle").textContent=a.client;document.getElementById("modalBody").innerHTML=`<div class="small">Vendeur : ${a.seller} • ${a.offers.length} offre${a.offers.length>1?"s":""}</div>`+a.offers.sort((x,y)=>new Date(y.date)-new Date(x.date)).map(o=>`<div class="row"><b>${o.offer} — ${o.model}</b><span>${dateFR(o.date)} • ${o.status}</span><span>${o.version||""} ${o.color?"• "+o.color:""}</span>${o.amount?`<span>${money(o.amount)}</span>`:""}</div>`).join("");document.getElementById("modal").classList.add("open")}
-function closeModal(){document.getElementById("modal").classList.remove("open")}
-function render(view="dashboard",arg=""){document.querySelectorAll(".nav button").forEach(b=>b.classList.toggle("active",b.dataset.view===view));if(view==="dashboard")dashboard();if(view==="affaires")affaires(arg);if(view==="offres")offers();if(view==="vendeurs")vendeurs()}
-document.querySelectorAll(".nav button").forEach(b=>b.onclick=()=>render(b.dataset.view));
-document.getElementById("modal").onclick=e=>{if(e.target.id==="modal")closeModal()};
-if(db.importedAt)document.getElementById("importInfo").textContent=`${db.offers.length} offres • ${clients().length} affaires clients • dernier import ${new Date(db.importedAt).toLocaleString("fr-FR")}`;
-render("dashboard");
+function row(x,hot){
+ return `<div class="row" onclick='openAff(${JSON.stringify(x.id)})'><div><b>${esc(x.client)}</b><div class="small">${esc(x.seller)}${x.date?' · '+esc(x.date):''}</div></div><span class="badge ${hot?'orange':x.bc?'green':''}">${esc(x.status)}${x.bc?' · BC':''}</span></div>`;
+}
+function openAff(id){
+ const x=data.find(y=>y.id===id);if(!x)return;
+ document.getElementById('modalTitle').textContent=x.client;
+ document.getElementById('modalBody').innerHTML=`<p><b>Vendeur :</b> ${esc(x.seller)}</p><p><b>Date :</b> ${esc(x.date)||'-'}</p><p><b>Statut :</b> ${esc(x.status)}</p><p><b>Montant :</b> ${esc(x.amount)||'-'}</p><p><b>Bon de commande :</b> ${x.bc?'Oui':'Non'}</p>`;
+ document.getElementById('modal').classList.add('show');
+}
+function closeModal(){document.getElementById('modal').classList.remove('show')}
+function esc(s){return clean(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function setData(rows,label){
+ data=rows;
+ document.getElementById('status').textContent=`${rows.length} offres importées · ${new Set(rows.map(x=>norm(x.client))).size} affaires clients · ${label}`;
+ render();
+ localStorage.setItem('pilotageData',JSON.stringify(data));
+}
+document.getElementById('file').addEventListener('change',e=>{
+ const f=e.target.files[0];if(!f)return;
+ const r=new FileReader();r.onload=()=>{try{setData(parseCSV(r.result),'import du '+new Date().toLocaleString('fr-FR'))}catch(err){alert('Impossible de lire ce fichier CSV.')}};r.readAsText(f,'UTF-8');
+});
+function loadDemo(){
+ setData([
+ {id:'1',client:'Dupont Jean',seller:'Ayoub',date:'22/09/2026',status:'Offre',amount:'30000',bc:false},
+ {id:'2',client:'Martin SARL',seller:'Anne',date:'22/09/2026',status:'Bon de commande',amount:'35000',bc:true},
+ {id:'3',client:'Durand Sophie',seller:'Thibaut',date:'21/09/2026',status:'Relance',amount:'28000',bc:false},
+ {id:'4',client:'Dupont Jean',seller:'Ayoub',date:'20/09/2026',status:'Offre refaite',amount:'30000',bc:false}
+ ],'exemple chargé');
+}
+function resetData(){data=[];localStorage.removeItem('pilotageData');document.getElementById('status').textContent='Données réinitialisées.';render()}
+try{const saved=localStorage.getItem('pilotageData');if(saved){data=JSON.parse(saved);document.getElementById('status').textContent=`${data.length} offres · données sauvegardées sur cet appareil`}}catch(e){}
+render();
 </script>
 </body>
 </html>
