@@ -7,143 +7,152 @@
 <style>
 :root{--navy:#17242d;--blue:#0877ff;--bg:#f4f6f8;--card:#fff;--text:#17202a;--muted:#68737d;--line:#dde2e7;--green:#1f9d55;--orange:#e58a00;--red:#d64545}
 *{box-sizing:border-box}body{margin:0;background:var(--bg);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;color:var(--text)}
-header{background:var(--navy);color:#fff;padding:18px 16px 20px;position:sticky;top:0;z-index:5}
-.head{max-width:1100px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:12px}
-h1{font-size:23px;margin:0}.sub{font-size:12px;opacity:.75;margin-top:4px}
-button{border:0;border-radius:12px;padding:11px 15px;font-weight:700;font-size:14px;cursor:pointer}
-.primary{background:var(--blue);color:#fff}.secondary{background:#fff;color:var(--navy)}
-main{max-width:1100px;margin:auto;padding:18px 14px 50px}
-.toolbar{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:16px}
-input[type=file]{display:none}
-.status{background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin-bottom:16px;font-size:13px}
-.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
-.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;box-shadow:0 1px 3px #0000000a}
-.kpi{font-size:30px;font-weight:800;margin-top:6px}.label{color:var(--muted);font-size:13px}.small{font-size:12px;color:var(--muted)}
-.section{margin-top:22px}.section h2{font-size:19px;margin:0 0 10px}
-.list{display:flex;flex-direction:column;gap:9px}.row{background:#fff;border:1px solid var(--line);border-radius:13px;padding:13px;display:flex;justify-content:space-between;gap:12px;align-items:center}
-.badge{display:inline-block;border-radius:999px;padding:4px 8px;font-size:11px;font-weight:700;background:#edf1f4}
-.green{background:#e8f7ee;color:var(--green)}.orange{background:#fff2dd;color:#a76100}.red{background:#fdeaea;color:#b33131}
-.sellergrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
-.empty{padding:22px;text-align:center;color:var(--muted);background:#fff;border:1px dashed #cbd2d8;border-radius:14px}
-.modal{position:fixed;inset:0;background:#0008;display:none;align-items:flex-end;justify-content:center;z-index:20}
-.modal.show{display:flex}.sheet{background:#fff;width:min(720px,100%);max-height:85vh;overflow:auto;border-radius:20px 20px 0 0;padding:18px}
-.sheet h2{margin:0 0 12px}.close{float:right;background:#eef1f4}.filehelp{font-size:12px;color:var(--muted);line-height:1.45}
-@media(max-width:800px){.grid{grid-template-columns:repeat(2,1fr)}.sellergrid{grid-template-columns:1fr 1fr}}
-@media(max-width:500px){.grid{grid-template-columns:1fr 1fr;gap:8px}.card{padding:12px}.kpi{font-size:25px}.sellergrid{grid-template-columns:1fr}.head{align-items:flex-start}.primary{padding:10px 12px}}
+header{background:var(--navy);color:#fff;padding:18px 16px 20px;position:sticky;top:0;z-index:5}.head{max-width:1100px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:12px}
+h1{font-size:23px;margin:0}.sub{font-size:12px;opacity:.75;margin-top:4px}button{border:0;border-radius:12px;padding:11px 15px;font-weight:700;font-size:14px;cursor:pointer}.primary{background:var(--blue);color:#fff}.secondary{background:#fff;color:var(--navy)}
+main{max-width:1100px;margin:auto;padding:18px 14px 50px}input[type=file]{display:none}.toolbar{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:16px}
+.status{background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin-bottom:16px;font-size:13px}.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;box-shadow:0 1px 3px #0000000a}.kpi{font-size:30px;font-weight:800;margin-top:6px}.label{color:var(--muted);font-size:13px}.small{font-size:12px;color:var(--muted)}
+.section{margin-top:22px}.section h2{font-size:19px;margin:0 0 10px}.list{display:flex;flex-direction:column;gap:9px}.row{background:#fff;border:1px solid var(--line);border-radius:13px;padding:13px;display:flex;justify-content:space-between;gap:12px;align-items:center;cursor:pointer}
+.badge{display:inline-block;border-radius:999px;padding:4px 8px;font-size:11px;font-weight:700;background:#edf1f4}.green{background:#e8f7ee;color:var(--green)}.orange{background:#fff2dd;color:#a76100}
+.sellergrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.empty{padding:22px;text-align:center;color:var(--muted);background:#fff;border:1px dashed #cbd2d8;border-radius:14px}
+.modal{position:fixed;inset:0;background:#0008;display:none;align-items:flex-end;justify-content:center;z-index:20}.modal.show{display:flex}.sheet{background:#fff;width:min(720px,100%);max-height:85vh;overflow:auto;border-radius:20px 20px 0 0;padding:18px}.sheet h2{margin:0 0 12px}.close{float:right;background:#eef1f4}
+@media(max-width:800px){.grid{grid-template-columns:repeat(2,1fr)}.sellergrid{grid-template-columns:1fr 1fr}}@media(max-width:500px){.grid{gap:8px}.card{padding:12px}.kpi{font-size:25px}.sellergrid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
 <header><div class="head">
 <div><h1>📊 Pilotage vendeurs</h1><div class="sub">Suivi quotidien de l'activité commerciale</div></div>
-<label><input id="file" type="file" accept=".csv,.txt"><button class="primary" onclick="document.getElementById('file').click()">＋ Importer</button></label>
+<label><input id="file" type="file" accept=".xlsx,.xls,.csv,.txt"><button class="primary" onclick="document.getElementById('file').click()">＋ Importer</button></label>
 </div></header>
-
 <main>
-<div class="toolbar">
-<button class="secondary" onclick="loadDemo()">Charger un exemple</button>
-<button class="secondary" onclick="resetData()">Réinitialiser</button>
-</div>
-<div id="status" class="status">Aucune donnée importée. Tu peux importer un fichier CSV depuis ton téléphone ou ton PC.</div>
-
+<div class="toolbar"><button class="secondary" onclick="loadDemo()">Charger un exemple</button><button class="secondary" onclick="resetData()">Réinitialiser</button></div>
+<div id="status" class="status">Aucune donnée importée. Tu peux maintenant importer directement ton fichier Excel .xlsx.</div>
 <div class="grid">
 <div class="card"><div class="label">Affaires clients</div><div id="kAff" class="kpi">0</div></div>
 <div class="card"><div class="label">Offres importées</div><div id="kOff" class="kpi">0</div></div>
 <div class="card"><div class="label">Affaires actives</div><div id="kAct" class="kpi">0</div></div>
 <div class="card"><div class="label">Avec bon de commande</div><div id="kBc" class="kpi">0</div></div>
 </div>
-
 <div class="section"><h2>Vue vendeurs</h2><div id="sellers" class="sellergrid"></div></div>
 <div class="section"><h2>Affaires chaudes</h2><div id="hot" class="list"></div></div>
 <div class="section"><h2>Dernières affaires</h2><div id="latest" class="list"></div></div>
 </main>
-
-<div id="modal" class="modal" onclick="if(event.target===this)closeModal()"><div class="sheet">
-<button class="close" onclick="closeModal()">Fermer</button><h2 id="modalTitle">Affaire</h2><div id="modalBody"></div>
-</div></div>
+<div id="modal" class="modal" onclick="if(event.target===this)closeModal()"><div class="sheet"><button class="close" onclick="closeModal()">Fermer</button><h2 id="modalTitle">Affaire</h2><div id="modalBody"></div></div></div>
 
 <script>
 let data=[];
+const te=new TextDecoder("utf-8");
+function clean(v){return String(v??"").trim()}
+function norm(v){return clean(v).toLowerCase().normalize("NFD").replace(/[\\u0300-\\u036f]/g,"")}
+function esc(s){return clean(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c]))}
 
-function clean(v){return String(v??'').trim()}
-function norm(v){return clean(v).toLowerCase().normalize('NFD').replace(/[\\u0300-\\u036f]/g,'')}
-function parseCSV(text){
-  text=text.replace(/^\\uFEFF/,'');
-  const lines=text.split(/\\r?\\n/).filter(x=>x.trim());
-  if(!lines.length)return [];
-  const sep=(lines[0].split(';').length>=lines[0].split(',').length)?';':',';
-  const rows=lines.map(line=>line.split(sep).map(x=>x.trim().replace(/^"(.*)"$/,'$1')));
-  const headers=rows.shift().map(norm);
-  const find=(names)=>{for(const n of names){const i=headers.findIndex(h=>h.includes(n));if(i>=0)return i}return -1};
-  const ci=find(['client','nom client','raison sociale','nom']);
-  const si=find(['vendeur','commercial','sales','conseiller']);
-  const di=find(['date','creation','offre']);
-  const pi=find(['statut','status','etape','stage']);
-  const mi=find(['montant','prix','total','ca']);
-  const bi=find(['bon de commande','commande','bc']);
-  return rows.map((r,i)=>({
-    id:String(i+1),client:clean(r[ci>=0?ci:0])||'Client sans nom',
-    seller:clean(r[si>=0?si:1])||'Non attribué',
-    date:clean(r[di>=0?di:2]),
-    status:clean(r[pi>=0?pi:3])||'En cours',
-    amount:clean(r[mi>=0?mi:4]),
-    bc:bi>=0? /oui|yes|1|commande|sign/.test(norm(r[bi])) : /commande|bon de commande|livr/i.test(norm(r[pi>=0?pi:3])),
-    raw:r
-  }));
+async function unzip(buf){
+  const b=new Uint8Array(buf), dv=new DataView(buf);
+  let eocd=-1;
+  for(let i=b.length-22;i>=Math.max(0,b.length-65557);i--) if(dv.getUint32(i,true)===0x06054b50){eocd=i;break}
+  if(eocd<0)throw Error("ZIP invalide");
+  const cdSize=dv.getUint32(eocd+12,true), cdOff=dv.getUint32(eocd+16,true);
+  let p=cdOff, files={};
+  while(p<cdOff+cdSize){
+    if(dv.getUint32(p,true)!==0x02014b50)break;
+    const method=dv.getUint16(p+10,true), csize=dv.getUint32(p+20,true), usize=dv.getUint32(p+24,true);
+    const nl=dv.getUint16(p+28,true), el=dv.getUint16(p+30,true), cl=dv.getUint16(p+32,true), lo=dv.getUint32(p+42,true);
+    const name=te.decode(b.slice(p+46,p+46+nl)); files[name]={method,csize,usize,lo};
+    p+=46+nl+el+cl;
+  }
+  async function get(name){
+    const f=files[name]; if(!f)return null;
+    const lp=f.lo, nl=dv.getUint16(lp+26,true), el=dv.getUint16(lp+28,true);
+    const start=lp+30+nl+el, raw=b.slice(start,start+f.csize);
+    if(f.method===0)return raw;
+    if(f.method!==8)throw Error("Compression ZIP non supportée");
+    const ds=new DecompressionStream("deflate-raw");
+    return new Uint8Array(await new Response(new Blob([raw]).stream().pipeThrough(ds)).arrayBuffer());
+  }
+  return {files,get};
+}
+function xmlText(xml){return te.decode(xml)}
+function decodeXml(s){return s.replace(/&amp;/g,"&").replace(/&lt;/g,"<").replace(/&gt;/g,">").replace(/&quot;/g,'"').replace(/&apos;/g,"'")}
+async function parseXlsx(buf){
+  const z=await unzip(buf);
+  const shared=[];
+  const ss=await z.get("xl/sharedStrings.xml");
+  if(ss){const doc=new DOMParser().parseFromString(xmlText(ss),"application/xml");doc.querySelectorAll("si").forEach(si=>shared.push([...si.querySelectorAll("t")].map(x=>x.textContent).join("")))}
+  const wb=await z.get("xl/workbook.xml");
+  const rel=await z.get("xl/_rels/workbook.xml.rels");
+  let sheetPath="xl/worksheets/sheet1.xml";
+  if(wb&&rel){
+    const wdoc=new DOMParser().parseFromString(xmlText(wb),"application/xml"), rdoc=new DOMParser().parseFromString(xmlText(rel),"application/xml");
+    const sh=wdoc.querySelector("sheet"), rid=sh?.getAttribute("r:id");
+    const rr=[...rdoc.querySelectorAll("Relationship")].find(x=>x.getAttribute("Id")===rid);
+    if(rr){let t=rr.getAttribute("Target");if(!t.startsWith("/"))t="xl/"+t.replace(/^\\.?\\//,"");sheetPath=t}
+  }
+  const sx=await z.get(sheetPath);if(!sx)throw Error("Feuille Excel introuvable");
+  const doc=new DOMParser().parseFromString(xmlText(sx),"application/xml");
+  const rows=[];
+  doc.querySelectorAll("sheetData row").forEach(row=>{
+    const vals={};
+    row.querySelectorAll(":scope > c").forEach(c=>{
+      const ref=c.getAttribute("r")||"", col=(ref.match(/[A-Z]+/)||["A"])[0];
+      const typ=c.getAttribute("t"), v=c.querySelector("v")?.textContent??"";
+      let val=v;
+      if(typ==="s")val=shared[Number(v)]??"";
+      else if(typ==="inlineStr")val=[...c.querySelectorAll("t")].map(x=>x.textContent).join("");
+      else if(typ==="b")val=v==="1"?"TRUE":"FALSE";
+      vals[col]=val;
+    });
+    rows.push(vals);
+  });
+  const maxCol=Math.max(0,...rows.map(r=>Object.keys(r).reduce((m,k)=>Math.max(m,colNum(k)),0)));
+  return rows.map(r=>{const a=[];for(let i=1;i<=maxCol;i++)a.push(r[colName(i)]??"");return a});
+}
+function colNum(s){let n=0;for(const c of s)n=n*26+c.charCodeAt(0)-64;return n}
+function colName(n){let s="";while(n){let r=(n-1)%26;s=String.fromCharCode(65+r)+s;n=Math.floor((n-1)/26)}return s}
+function excelDate(v){
+  if(!v)return ""; const n=Number(v); if(!Number.isFinite(n))return v;
+  const d=new Date(Date.UTC(1899,11,30)+n*86400000); return d.toLocaleDateString("fr-FR",{timeZone:"UTC"});
+}
+function rowsToData(rows){
+  if(!rows.length)return [];
+  const headers=rows[0].map(norm);
+  const idx=(names)=>{for(const n of names){const i=headers.findIndex(h=>h===n||h.includes(n));if(i>=0)return i}return -1};
+  const iRef=idx(["offre et bon de commande"]),iOff=idx(["offre"]),iClient=idx(["compte"]),iDate=idx(["date de l'offre","date offre"]),iModel=idx(["modèle"]),iVersion=idx(["version"]),iStatus=idx(["statut"]),iAmount=idx(["total net à payer"]),iSeller=idx(["nom du propriétaire"]),iBrand=idx(["marque"]);
+  return rows.slice(1).map((r,i)=>({
+    id:String(i+1),ref:clean(r[iRef>=0?iRef:-1]),offre:clean(r[iOff>=0?iOff:-1]),client:clean(r[iClient>=0?iClient:-1]),
+    date:excelDate(r[iDate>=0?iDate:-1]),model:clean(r[iModel>=0?iModel:-1]),version:clean(r[iVersion>=0?iVersion:-1]),
+    status:clean(r[iStatus>=0?iStatus:-1])||"En cours",amount:clean(r[iAmount>=0?iAmount:-1]),seller:clean(r[iSeller>=0?iSeller:-1])||"Non attribué",brand:clean(r[iBrand>=0?iBrand:-1]),
+    bc:!!clean(r[iRef>=0?iRef:-1])
+  })).filter(x=>x.client||x.ref||x.offre);
+}
+async function parseFile(file){
+  if(/\.xlsx?$/i.test(file.name)){const rows=await parseXlsx(await file.arrayBuffer());return rowsToData(rows)}
+  const text=await file.text(), lines=text.split(/\\r?\\n/).filter(x=>x.trim()), sep=(lines[0].split(";").length>=lines[0].split(",").length)?";":",";
+  return rowsToData(lines.map(x=>x.split(sep).map(v=>v.replace(/^"(.*)"$/,"$1"))));
 }
 function render(){
   const clients=new Map();
   data.forEach(x=>{const k=norm(x.client)||x.id;if(!clients.has(k))clients.set(k,[]);clients.get(k).push(x)});
-  const affairs=[...clients.values()].map(a=>a[a.length-1]);
-  document.getElementById('kAff').textContent=affairs.length;
-  document.getElementById('kOff').textContent=data.length;
-  document.getElementById('kAct').textContent=affairs.filter(x=>!/(livr|annul|perdu|vendu)/i.test(x.status)).length;
-  document.getElementById('kBc').textContent=affairs.filter(x=>x.bc).length;
-
-  const bySeller={};
-  data.forEach(x=>{bySeller[x.seller]??=[];bySeller[x.seller].push(x)});
-  const sg=document.getElementById('sellers');sg.innerHTML='';
-  Object.entries(bySeller).sort((a,b)=>b[1].length-a[1].length).forEach(([s,arr])=>{
-    const unique=new Set(arr.map(x=>norm(x.client))).size;
-    sg.innerHTML+=`<div class="card"><b>${esc(s)}</b><div class="kpi">${unique}</div><div class="small">affaires · ${arr.length} offres</div></div>`;
-  });
+  const affairs=[...clients.values()].map(a=>a.sort((x,y)=>dateVal(y.date)-dateVal(x.date))[0]);
+  document.getElementById("kAff").textContent=affairs.length;
+  document.getElementById("kOff").textContent=data.length;
+  document.getElementById("kAct").textContent=affairs.filter(x=>!/(annul|perdu|livr|vendu)/i.test(x.status)).length;
+  document.getElementById("kBc").textContent=affairs.filter(x=>x.bc).length;
+  const by={};data.forEach(x=>(by[x.seller]??=[]).push(x));const sg=document.getElementById("sellers");sg.innerHTML="";
+  Object.entries(by).sort((a,b)=>b[1].length-a[1].length).forEach(([s,a])=>{const u=new Set(a.map(x=>norm(x.client))).size;sg.innerHTML+=`<div class="card"><b>${esc(s)}</b><div class="kpi">${u}</div><div class="small">affaires · ${a.length} offres</div></div>`});
   if(!sg.innerHTML)sg.innerHTML='<div class="empty">Aucun vendeur à afficher.</div>';
-
-  const hot=affairs.filter(x=>!x.bc && !/(annul|perdu|vendu|livr)/i.test(x.status)).slice(0,20);
-  document.getElementById('hot').innerHTML=hot.length?hot.map(x=>row(x,true)).join(''):'<div class="empty">Aucune affaire chaude.</div>';
-  const latest=[...data].reverse().slice(0,20);
-  document.getElementById('latest').innerHTML=latest.length?latest.map(x=>row(x,false)).join(''):'<div class="empty">Aucune affaire.</div>';
+  const hot=affairs.filter(x=>!x.bc&&!/(annul|perdu|vendu|livr)/i.test(x.status)).slice(0,30);
+  document.getElementById("hot").innerHTML=hot.length?hot.map(x=>row(x,true)).join(""):'<div class="empty">Aucune affaire chaude.</div>';
+  document.getElementById("latest").innerHTML=data.slice().sort((a,b)=>dateVal(b.date)-dateVal(a.date)).slice(0,30).map(x=>row(x,false)).join("")||'<div class="empty">Aucune affaire.</div>';
 }
-function row(x,hot){
- return `<div class="row" onclick='openAff(${JSON.stringify(x.id)})'><div><b>${esc(x.client)}</b><div class="small">${esc(x.seller)}${x.date?' · '+esc(x.date):''}</div></div><span class="badge ${hot?'orange':x.bc?'green':''}">${esc(x.status)}${x.bc?' · BC':''}</span></div>`;
-}
-function openAff(id){
- const x=data.find(y=>y.id===id);if(!x)return;
- document.getElementById('modalTitle').textContent=x.client;
- document.getElementById('modalBody').innerHTML=`<p><b>Vendeur :</b> ${esc(x.seller)}</p><p><b>Date :</b> ${esc(x.date)||'-'}</p><p><b>Statut :</b> ${esc(x.status)}</p><p><b>Montant :</b> ${esc(x.amount)||'-'}</p><p><b>Bon de commande :</b> ${x.bc?'Oui':'Non'}</p>`;
- document.getElementById('modal').classList.add('show');
-}
-function closeModal(){document.getElementById('modal').classList.remove('show')}
-function esc(s){return clean(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
-function setData(rows,label){
- data=rows;
- document.getElementById('status').textContent=`${rows.length} offres importées · ${new Set(rows.map(x=>norm(x.client))).size} affaires clients · ${label}`;
- render();
- localStorage.setItem('pilotageData',JSON.stringify(data));
-}
-document.getElementById('file').addEventListener('change',e=>{
- const f=e.target.files[0];if(!f)return;
- const r=new FileReader();r.onload=()=>{try{setData(parseCSV(r.result),'import du '+new Date().toLocaleString('fr-FR'))}catch(err){alert('Impossible de lire ce fichier CSV.')}};r.readAsText(f,'UTF-8');
-});
-function loadDemo(){
- setData([
- {id:'1',client:'Dupont Jean',seller:'Ayoub',date:'22/09/2026',status:'Offre',amount:'30000',bc:false},
- {id:'2',client:'Martin SARL',seller:'Anne',date:'22/09/2026',status:'Bon de commande',amount:'35000',bc:true},
- {id:'3',client:'Durand Sophie',seller:'Thibaut',date:'21/09/2026',status:'Relance',amount:'28000',bc:false},
- {id:'4',client:'Dupont Jean',seller:'Ayoub',date:'20/09/2026',status:'Offre refaite',amount:'30000',bc:false}
- ],'exemple chargé');
-}
-function resetData(){data=[];localStorage.removeItem('pilotageData');document.getElementById('status').textContent='Données réinitialisées.';render()}
-try{const saved=localStorage.getItem('pilotageData');if(saved){data=JSON.parse(saved);document.getElementById('status').textContent=`${data.length} offres · données sauvegardées sur cet appareil`}}catch(e){}
+function dateVal(s){const m=clean(s).match(/(\\d{1,2})[\\/\\-](\\d{1,2})[\\/\\-](\\d{4})/);return m?new Date(+m[3],+m[2]-1,+m[1]).getTime():0}
+function row(x,hot){return `<div class="row" onclick='openAff(${JSON.stringify(x.id)})'><div><b>${esc(x.client)}</b><div class="small">${esc(x.seller)} · ${esc(x.model)}${x.date?" · "+esc(x.date):""}</div></div><span class="badge ${hot?"orange":x.bc?"green":""}">${esc(x.status)}${x.bc?" · BC":""}</span></div>`}
+function openAff(id){const x=data.find(y=>y.id===id);if(!x)return;document.getElementById("modalTitle").textContent=x.client;document.getElementById("modalBody").innerHTML=`<p><b>Vendeur :</b> ${esc(x.seller)}</p><p><b>Offre :</b> ${esc(x.ref||x.offre)||"-"}</p><p><b>Date :</b> ${esc(x.date)||"-"}</p><p><b>Statut :</b> ${esc(x.status)}</p><p><b>Modèle :</b> ${esc(x.model)} ${esc(x.version)}</p><p><b>Montant :</b> ${esc(x.amount)||"-"}</p><p><b>Bon de commande :</b> ${x.bc?"Oui":"Non"}</p>`;document.getElementById("modal").classList.add("show")}
+function closeModal(){document.getElementById("modal").classList.remove("show")}
+function setData(rows,label){data=rows;document.getElementById("status").textContent=`${rows.length} offres importées · ${new Set(rows.map(x=>norm(x.client))).size} affaires clients · ${label}`;localStorage.setItem("pilotageData",JSON.stringify(data));render()}
+document.getElementById("file").addEventListener("change",async e=>{const f=e.target.files[0];if(!f)return;document.getElementById("status").textContent="Lecture du fichier Excel…";try{setData(await parseFile(f),"import du "+new Date().toLocaleString("fr-FR"))}catch(err){console.error(err);document.getElementById("status").textContent="Erreur de lecture : "+err.message}});
+function loadDemo(){setData([{id:"1",client:"DUPONT JEAN",seller:"Ayoub",date:"22/09/2026",model:"208",status:"Actif",amount:"30000",bc:false,ref:"Q-1"},{id:"2",client:"MARTIN SARL",seller:"Anne",date:"22/09/2026",model:"3008",status:"Actif",amount:"35000",bc:true,ref:"Q-2"},{id:"3",client:"DUPONT JEAN",seller:"Ayoub",date:"20/09/2026",model:"208",status:"Actif",amount:"30000",bc:false,ref:"Q-0"}],"exemple chargé")}
+function resetData(){data=[];localStorage.removeItem("pilotageData");document.getElementById("status").textContent="Données réinitialisées.";render()}
+try{const s=localStorage.getItem("pilotageData");if(s){data=JSON.parse(s);document.getElementById("status").textContent=`${data.length} offres · données sauvegardées sur cet appareil`}}catch(e){}
 render();
 </script>
 </body>
